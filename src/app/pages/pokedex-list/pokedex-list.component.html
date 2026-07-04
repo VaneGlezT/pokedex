@@ -1,1 +1,30 @@
-<p>pokedex-list works!</p>
+<app-header></app-header>
+<div  class="main-container">
+    <div data-aos="zoom-out" data-aos-delay="600"  class="poke-img">
+        <img *ngIf="selectedPokemon"[src]="selectedPokemon.image" />
+    </div>
+    <div data-aos="zoom-out" data-aos-delay="600"  class="poke-list">
+        <div class="poke-container">
+            @for (pokemon of pokemons; track pokemon.name) {
+            <div class="card" (click)="selectPokemon(pokemon)">
+                <div class="card-body">
+                    <div class="poke-left">
+                        <img src="pokeball.png" class="pokeball" />
+                        {{ pokemon.name | titlecase }}
+                    </div>
+
+                    <div class="poke-types">
+                        @for (type of pokemon.types; track type) {
+                        <span class="badge rounded-pill type-badge"
+                            [ngStyle]="{ 'background-color': getTypeColor(type) }">
+                            {{ type | titlecase }}
+                        </span>
+                        }
+                    </div>
+                </div>
+            </div>
+            }
+        </div>
+
+    </div>
+</div>

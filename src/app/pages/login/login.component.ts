@@ -30,6 +30,17 @@ export class LoginComponent {
   ngOnInit(): void {
     AOS.init();
   }
+
+  ngAfterViewInit(): void {
+    AOS.init({
+      once: false
+    });
+
+    setTimeout(() => {
+      AOS.refresh();
+    });
+  }
+
   login() {
     const user = this.loginForm.get('user')?.value;
     const password = this.loginForm.get('password')?.value;
@@ -39,12 +50,12 @@ export class LoginComponent {
     }
 
     if (user === 'admin' && password === 'admin') {
-      this.snackBar.open('Sesión iniciada', 'Cerrar', { duration: 5000 });
+      this.snackBar.open('Sesión iniciada', 'Cerrar', { duration: 2000 });
 
       localStorage.setItem('logged', 'true');
       this.router.navigate(['/pokedex-list']);
     } else {
-      this.snackBar.open('Credenciales inválidas', 'Cerrar', { duration: 5000 });
+      this.snackBar.open('Credenciales inválidas', 'Cerrar', { duration: 2000 });
     }
   }
 

@@ -1,0 +1,25 @@
+.navbar {
+  background-color: #950606;
+  position: relative;
+  min-height: 60px;
+  width: 100%;
+}
+
+.logo-container {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.logo {
+  width: 150px;
+  display: block;
+}
+
+.logout-btn {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+}

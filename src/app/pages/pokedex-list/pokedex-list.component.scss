@@ -1,0 +1,108 @@
+.main-container {
+    background-color: #b32630;
+    height: 100%;
+    display: flex;
+
+    .poke-img {
+        width: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .poke-list {
+        width: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 40px;
+
+        .poke-container {
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+            max-width: 500px;
+            max-height: 500px;
+            overflow-y: auto;
+            overflow-x: hidden;
+
+            .card {
+                width: 100%;
+                border-radius: 10px;
+                background-color: #fff;
+                padding: 20px;
+                margin-bottom: 10px;
+                cursor: pointer;
+
+                .card-body {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                }
+
+                .poke-left {
+                    display: flex;
+                    align-items: center;
+                    gap: 8px;
+                }
+
+                .pokeball {
+                    width: 40px;
+                }
+
+                .poke-types {
+                    display: flex;
+                    gap: 5px;
+                }
+            }
+            .card:hover{
+                background-color: lightgray;
+            }
+        }
+
+    }
+}
+
+.fire {
+    background: #f08030;
+}
+
+.water {
+    background: #6890f0;
+}
+
+.grass {
+    background: #78c850;
+}
+
+.electric {
+    background: #f8d030;
+}
+
+.poison {
+    background: #a040a0;
+}
+
+.rock {
+    background: #b8a038;
+}
+
+.ground {
+    background: #e0c068;
+}
+
+.psychic {
+    background: #f85888;
+}
+
+.ice {
+    background: #98d8d8;
+}
+
+.dragon {
+    background: #7038f8;
+}
+
+.normal {
+    background: #a8a878;
+}

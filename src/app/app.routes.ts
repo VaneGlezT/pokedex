@@ -6,5 +6,6 @@ import { authGuard } from './auth.guard';
 export const routes: Routes = [
     { path: '', redirectTo: 'login', pathMatch: 'full' },
     { path: 'login', component: LoginComponent },
-    { path: 'pokedex-list', component: PokedexListComponent, canActivate: [authGuard] }
+    { path: 'pokedex-list', component: PokedexListComponent, canActivate: [authGuard] },
+    { path: '**', redirectTo: 'login' }
 ];
