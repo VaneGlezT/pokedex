@@ -5,7 +5,27 @@
     justify-content: center;
     align-items: center;
     background: linear-gradient(to bottom, #ff2b2b, #8b0000);
-    .login-image {
-        width: 450px;
+
+    .main-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+
+        .login-image {
+            width: 450px;
+        }
+
+        .poke-form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            padding: 20px;
+            .login-btn {
+                width: 200px;
+            }
+        }
+
     }
 }
