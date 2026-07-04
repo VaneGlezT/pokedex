@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-
+import * as AOS from 'aos';
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -8,5 +8,7 @@ import { Component } from '@angular/core';
   styleUrl: './login.component.scss'
 })
 export class LoginComponent {
-
+  ngOnInit(): void {
+    AOS.init();
+  }
 }
