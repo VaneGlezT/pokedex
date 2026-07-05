@@ -16,11 +16,21 @@
             padding: 20px;
             display: block;
             max-width: 100%;
+
+            @media (max-width: 950px) {
+                width: 250px;
+                padding: 10px;
+            }
         }
 
         .pokeball-image {
             width: 100px;
             max-width: 100%;
+
+            @media (max-width: 950px) {
+                width: 60px;
+                max-width: 100%;
+            }
         }
 
         .poke-form {
@@ -32,22 +42,6 @@
 
             .login-btn {
                 width: 200px;
-            }
-        }
-    }
-}
-
-@media (max-width: 950px) {
-    .login-container {
-        .main-container {
-            .login-image {
-                width: 250px;
-                padding: 10px;
-            }
-
-            .pokeball-image {
-                width: 60px;
-                max-width: 100%;
             }
         }
     }
