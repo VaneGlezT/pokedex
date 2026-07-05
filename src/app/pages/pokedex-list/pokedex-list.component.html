@@ -1,29 +1,43 @@
 <app-header></app-header>
-<div  class="main-container">
-    <div data-aos="zoom-out" data-aos-delay="600"  class="poke-img">
-        <img *ngIf="selectedPokemon"[src]="selectedPokemon.image" />
+<div class="main-container">
+    <div data-aos="zoom-out" data-aos-delay="600" class="left-container">
+        <img *ngIf="selectedPokemon" [src]="selectedPokemon.image" class="poke-img" />
+        <button type="button" class="btn btn-outline-warning poke-btn" (click)="playCry(selectedPokemon.cry)">
+            Cry
+            <mat-icon fontSet="material-symbols-outlined">
+                brand_awareness
+            </mat-icon>
+        </button>
     </div>
-    <div data-aos="zoom-out" data-aos-delay="600"  class="poke-list">
+    <div data-aos="zoom-out" data-aos-delay="600" class="poke-list">
         <div class="poke-container">
-            @for (pokemon of pokemons; track pokemon.name) {
-            <div class="card" (click)="selectPokemon(pokemon)">
-                <div class="card-body">
-                    <div class="poke-left">
-                        <img src="pokeball.png" class="pokeball" />
-                        {{ pokemon.name | titlecase }}
-                    </div>
+            <div class="input-group mb-3 search">
+                <span class="input-group-text">🔍</span>
+                <input type="text" class="form-control" placeholder="Search Pokémon..." [(ngModel)]="searchText" />
+            </div>
+            <div class="list">
+                @for (pokemon of filteredPokemons; track pokemon.name; let i = $index) {
+                <div class="card" (click)="selectPokemon(pokemon)"
+                    [class.selected]="selectedPokemon?.name === pokemon.name">
+                    <div class="card-body">
+                        <div class="poke-left">
+                            <img src="pokeball.png" class="pokeball" />
+                            #{{ i + 1 }} {{ pokemon.name | titlecase }}
+                        </div>
 
-                    <div class="poke-types">
-                        @for (type of pokemon.types; track type) {
-                        <span class="badge rounded-pill type-badge"
-                            [ngStyle]="{ 'background-color': getTypeColor(type) }">
-                            {{ type | titlecase }}
-                        </span>
-                        }
+                        <div class="poke-types">
+                            @for (type of pokemon.types; track type) {
+                            <span class="badge rounded-pill type-badge"
+                                [ngStyle]="{ 'background-color': getTypeColor(type) }">
+                                {{ type | titlecase }}
+                            </span>
+                            }
+                        </div>
                     </div>
                 </div>
+                }
             </div>
-            }
+
         </div>
 
     </div>

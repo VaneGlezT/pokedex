@@ -3,10 +3,12 @@ import { HeaderComponent } from '../../shared/header/header.component';
 import { PokemonsService } from '../../services/pokemons.service';
 import { CommonModule } from '@angular/common';
 import { forkJoin } from 'rxjs';
+import { MatIconModule } from '@angular/material/icon';
+import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-pokedex-list',
   standalone: true,
-  imports: [HeaderComponent, CommonModule],
+  imports: [HeaderComponent, CommonModule, MatIconModule, FormsModule],
   templateUrl: './pokedex-list.component.html',
   styleUrl: './pokedex-list.component.scss'
 })
@@ -15,6 +17,7 @@ export class PokedexListComponent {
   private pokemonService = inject(PokemonsService);
   public pokemons: any[] = [];
   public selectedPokemon: any = null;
+  public searchText: string = '';
 
   ngOnInit(): void {
     this.getPokemons();
@@ -77,6 +80,18 @@ export class PokedexListComponent {
 
   selectPokemon(pokemon: any) {
     this.selectedPokemon = pokemon;
+  }
+
+  playCry(url: string): void {
+    const audio = new Audio(url);
+    audio.play();
+  }
+
+  get filteredPokemons() {
+    return this.pokemons
+      .filter(p =>
+        p.name.toLowerCase().includes(this.searchText.toLowerCase())
+      )
   }
 
 }

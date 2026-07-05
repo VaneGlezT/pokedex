@@ -1,14 +1,36 @@
 .main-container {
     background-color: #b32630;
-    height: 100%;
+    min-height: 100vh;
     display: flex;
 
-    .poke-img {
+    @media (max-width: 950px) {
+        display: block;
+    }
+
+    .left-container {
         width: 50%;
         display: flex;
-        align-items: center;
+        flex-direction: column;
         justify-content: center;
+        align-items: center;
+
+        @media (max-width: 950px) {
+            width: 100%;
+        }
+
+        .poke-btn {
+            display: flex;
+        }
+
+        .poke-img {
+            width: 400px;
+
+            @media (max-width: 950px) {
+                width: 200px;
+            }
+        }
     }
+
 
     .poke-list {
         width: 50%;
@@ -17,51 +39,84 @@
         align-items: center;
         padding: 40px;
 
+        @media (max-width: 950px) {
+            width: 100%;
+            padding: 20px;
+        }
+
         .poke-container {
             width: 100%;
             height: 100%;
             border-radius: 10px;
-            max-width: 500px;
-            max-height: 500px;
-            overflow-y: auto;
-            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
 
-            .card {
-                width: 100%;
-                border-radius: 10px;
-                background-color: #fff;
-                padding: 20px;
-                margin-bottom: 10px;
-                cursor: pointer;
+            .search {
+                max-width: 500px;
 
-                .card-body {
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-                }
-
-                .poke-left {
-                    display: flex;
-                    align-items: center;
-                    gap: 8px;
-                }
-
-                .pokeball {
-                    width: 40px;
-                }
-
-                .poke-types {
-                    display: flex;
-                    gap: 5px;
+                @media (max-width: 950px) {
+                    max-width: 100%;
                 }
             }
-            .card:hover{
-                background-color: lightgray;
+
+            .list {
+                max-width: 500px;
+                height: 500px;
+                overflow-y: auto;
+                overflow-x: hidden;
+
+                @media (max-width: 950px) {
+                    max-width: 100%;
+                }
+
+                .card {
+                    width: 100%;
+                    border-radius: 10px;
+                    padding: 20px;
+                    margin-bottom: 10px;
+                    cursor: pointer;
+
+                    .card-body {
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                    }
+
+                    .poke-left {
+                        display: flex;
+                        align-items: center;
+                        gap: 8px;
+                    }
+
+                    .pokeball {
+                        width: 40px;
+                    }
+
+                    .poke-types {
+                        display: flex;
+                        gap: 5px;
+                    }
+                }
+
+                .card:hover {
+                    background-color: lightgray;
+                }
+
+                .card.selected {
+                    background-color: #CD5C5C;
+                    color: #fff;
+                    border-color: red;
+                }
             }
+
+
+
         }
 
     }
 }
+
 
 .fire {
     background: #f08030;
