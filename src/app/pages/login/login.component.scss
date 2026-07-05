@@ -1,0 +1,48 @@
+.login-container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to bottom, #ff2b2b, #8b0000);
+
+    .main-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .login-image {
+            width: 450px;
+            padding: 20px;
+            display: block;
+            max-width: 100%;
+
+            @media (max-width: 950px) {
+                width: 250px;
+                padding: 10px;
+            }
+        }
+
+        .pokeball-image {
+            width: 100px;
+            max-width: 100%;
+
+            @media (max-width: 950px) {
+                width: 60px;
+                max-width: 100%;
+            }
+        }
+
+        .poke-form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            padding-top: 20px;
+
+            .login-btn {
+                width: 200px;
+            }
+        }
+    }
+}
