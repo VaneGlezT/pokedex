@@ -6,15 +6,8 @@ body {
   padding: 0;
   width: 100%;
   height: 100%;
-}
-
-html,
-body {
-  height: 100%;
-}
-
-body {
-  margin: 0;
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
