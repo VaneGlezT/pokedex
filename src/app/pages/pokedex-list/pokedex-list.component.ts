@@ -18,6 +18,9 @@ export class PokedexListComponent {
   public pokemons: any[] = [];
   public selectedPokemon: any = null;
   public searchText: string = '';
+  public currentPage: number = 1;
+  public itemsPerPage: number = 30;
+  public isLoading = true;
 
   ngOnInit(): void {
     this.getPokemons();
@@ -35,17 +38,21 @@ export class PokedexListComponent {
           next: (details) => {
 
             this.pokemons = details.map((detail: any) => ({
+              id: detail.id,
               name: detail.name,
               image: detail.sprites.other['official-artwork'].front_default,
               types: detail.types.map((t: any) => t.type.name),
-              cry: detail.cries?.latest
+              cry: detail.cries?.latest,
+              loadingImage: true
             }));
             if (this.pokemons.length) {
               this.selectPokemon(this.pokemons[0]);
             }
+            this.isLoading = false;
           },
           error: (err) => {
             console.error('Error loading details', err);
+            this.isLoading = false;
           }
         });
       }
@@ -88,10 +95,28 @@ export class PokedexListComponent {
   }
 
   get filteredPokemons() {
-    return this.pokemons
-      .filter(p =>
-        p.name.toLowerCase().includes(this.searchText.toLowerCase())
-      )
+    return this.pokemons.filter(p =>
+      p.name.toLowerCase().includes(this.searchText.toLowerCase())
+    );
+  }
+
+  get paginatedPokemons() {
+    const start = (this.currentPage - 1) * this.itemsPerPage;
+    const end = start + this.itemsPerPage;
+    return this.filteredPokemons.slice(start, end);
+  }
+
+  get totalPages() {
+    return Math.ceil(this.filteredPokemons.length / this.itemsPerPage);
+  }
+
+  get pages(): number[] {
+    return Array.from({ length: this.totalPages }, (_, i) => i + 1);
+  }
+
+  changePage(page: number): void {
+    if (page < 1 || page > this.totalPages) return;
+    this.currentPage = page;
   }
 
 }

@@ -1,44 +1,79 @@
 <app-header></app-header>
 <div class="main-container">
-    <div data-aos="zoom-out" data-aos-delay="600" class="left-container">
-        <img *ngIf="selectedPokemon" [src]="selectedPokemon.image" class="poke-img" />
-        <button type="button" class="btn btn-outline-warning poke-btn" (click)="playCry(selectedPokemon.cry)">
-            Cry
-            <mat-icon fontSet="material-symbols-outlined">
-                brand_awareness
-            </mat-icon>
-        </button>
-    </div>
-    <div data-aos="zoom-out" data-aos-delay="600" class="poke-list">
-        <div class="poke-container">
-            <div class="input-group mb-3 search">
-                <span class="input-group-text">🔍</span>
-                <input type="text" class="form-control" placeholder="Search Pokémon..." [(ngModel)]="searchText" />
+    <div class="poke-list">
+         @if (isLoading) {
+          <div class="spinner-border text-danger loading" role="status">
+                <span class="visually-hidden">Loading...</span>
             </div>
-            <div class="list">
-                @for (pokemon of filteredPokemons; track pokemon.name; let i = $index) {
+        }
+         @if (!isLoading) {
+        <div class="poke-container">
+           
+            <div data-aos="zoom-out" data-aos-delay="600" class="input-group mb-3 search">
+                <span class="input-group-text">🔍</span>
+                <input type="text" class="form-control" placeholder="Search Pokémon..." [(ngModel)]="searchText"
+                    (ngModelChange)="currentPage = 1" />
+            </div>
+            <div class="list" data-aos="fade-up" data-aos-delay="800">
+                @for (pokemon of paginatedPokemons; track pokemon.name; let i = $index) {
                 <div class="card" (click)="selectPokemon(pokemon)"
-                    [class.selected]="selectedPokemon?.name === pokemon.name">
+                    [class.selected]="selectedPokemon?.name === pokemon.name"
+                    [ngStyle]="{ 'background-color':  getTypeColor(pokemon.types[0]) }">
                     <div class="card-body">
-                        <div class="poke-left">
-                            <img src="pokeball.png" class="pokeball" />
-                            #{{ i + 1 }} {{ pokemon.name | titlecase }}
+                        <div class="loading-container" *ngIf="pokemon.loadingImage">
+                            <img src="pokeball.png" alt="Loading" class="loading-spinner">
                         </div>
 
+                        <img *ngIf="pokemon.image" [src]="pokemon.image" class="poke-img"
+                            (load)="pokemon.loadingImage = false" [hidden]="pokemon.loadingImage" />
+                        <p> #{{ pokemon.id }} {{ pokemon.name | titlecase }}</p>
                         <div class="poke-types">
                             @for (type of pokemon.types; track type) {
-                            <span class="badge rounded-pill type-badge"
-                                [ngStyle]="{ 'background-color': getTypeColor(type) }">
+
+                            <span class="badge rounded-pill" [ngStyle]="{ 'background-color': getTypeColor(type) }">
                                 {{ type | titlecase }}
                             </span>
                             }
                         </div>
+
+                        <button type="button" class="btn btn-outline-warning poke-btn"
+                            (click)="playCry(selectedPokemon.cry)">
+                            Cry
+                            <mat-icon fontSet="material-symbols-outlined">
+                                brand_awareness
+                            </mat-icon>
+                        </button>
                     </div>
                 </div>
                 }
             </div>
-
+            
         </div>
-
+    }
     </div>
+    @if (!isLoading && totalPages > 1) {
+    <nav class="mt-3 d-flex justify-content-right paginator">
+        <ul class="pagination">
+            <li class="page-item" [class.disabled]="currentPage === 1">
+                <button class="page-link" (click)="changePage(currentPage - 1)">
+                    Previous
+                </button>
+            </li>
+
+            @for (page of pages; track page) {
+            <li class="page-item" [class.active]="currentPage === page">
+                <button class="page-link " (click)="changePage(page)">
+                    {{ page }}
+                </button>
+            </li>
+            }
+
+            <li class="page-item" [class.disabled]="currentPage === totalPages">
+                <button class="page-link  " (click)="changePage(currentPage + 1)">
+                    Next
+                </button>
+            </li>
+        </ul>
+    </nav>
+    }
 </div>
