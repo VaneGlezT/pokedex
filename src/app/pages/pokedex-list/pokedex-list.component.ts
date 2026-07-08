@@ -21,6 +21,7 @@ export class PokedexListComponent {
   public currentPage: number = 1;
   public itemsPerPage: number = 30;
   public isLoading = true;
+  public cryAudio: HTMLAudioElement | null = null;
 
   ngOnInit(): void {
     this.getPokemons();
@@ -90,7 +91,8 @@ export class PokedexListComponent {
   }
 
   playCry(url: string): void {
-    const audio = new Audio(url);
+    let audio = null;
+    audio = new Audio(url);
     audio.play();
   }
 
